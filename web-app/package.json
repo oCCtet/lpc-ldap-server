@@ -1,0 +1,33 @@
+{
+  "name": "web-app",
+  "version": "0.0.0",
+  "description": "LPC phpLDAPAdmin web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "./tests/run-tests",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oCCtet/lpc-ldap-server.git"
+  },
+  "keywords": [
+    "lpc",
+    "ldap",
+    "web",
+    "webui",
+    "app"
+  ],
+  "author": "Sami Hartikainen <sami.hartikainen@teleste.com>",
+  "license": "Teleste Proprietary",
+  "dependencies": {
+    "express": "~4.13.3",
+    "q": "~1.4.1",
+    "lodash": "~3.10.1",
+    "body-parser": "~1.14.0"
+  },
+  "devDependencies": {
+    "jshint": "~2.8.0",
+    "make-jshint": "~1.0.0"
+  }
+}

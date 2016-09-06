@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<engine v='1'>
+  <!--
+  xmlns="http://www.teleste.com"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.teleste.com index.xsd"
+  -->
+
+  <!--
+  This file defines how the application's user interface is to be incorporated into
+  the Luminato's management console (WebUI); a number of pre-defined locations are
+  available. If a location is not used, it can be omitted entirely from this file.
+    Application-specific meta models shall be defined in file index.json, and any
+  JavaScript required by the models in file <ctor>.jsonp (<ctor> being defined in
+  the index.json file).
+  -->
+
+  <!--
+  Module monitoring opens by clicking the module face plate on the Monitor page;
+  it supports tabbed view, illustrated below: the first tab shows basic OS stats,
+  while the second tab shows CPU stats.
+  -->
+  <module_monitoring>
+    <edit icon='Monitor' heading=' Application module monitoring'>
+      <tab heading='OS information'>
+        <list widths='100%'>
+          <row><col>
+            <os_info model-meta='OsInfo' model-multiple='true' refreshable='false' widths='140px,140px,100%,140px'>
+              <header-row>
+                <col><text attr="hostname" /></col>
+                <col><text attr="type" /></col>
+                <col><text attr="release" /></col>
+                <col><text attr="arch" /></col>
+              </header-row>
+              <model-row>
+                <col><field readonly="true" attr="hostname" /></col>
+                <col><field readonly="true" attr="type" /></col>
+                <col><field readonly="true" attr="release" /></col>
+                <col><field readonly="true" attr="arch" /></col>
+              </model-row>
+            </os_info>
+          </col></row>
+          <row><col>
+            <os_stats model-meta='OsStats' model-multiple='true' refreshable='true' widths='140px,140px,200px,100%'>
+              <header-row>
+                <col><text attr="totalmem" /></col>
+                <col><text attr="freemem" /></col>
+                <col><text attr="loadavg" /></col>
+                <col><text attr="temperatures" /></col>
+              </header-row>
+              <model-row>
+                <col><field readonly="true" attr="totalmem" /></col>
+                <col><field readonly="true" attr="freemem" /></col>
+                <col><field readonly="true" attr="loadavg" /></col>
+                <col><field readonly="true" attr="temperatures" /></col>
+              </model-row>
+            </os_stats>
+          </col></row>
+        </list>
+      </tab>
+      <tab heading='CPU information'>
+        <list widths='100%'>
+          <row><col>
+            <cpu_info model-meta='CpuInfo' model-multiple='true' refreshable='true' widths='100%,140px'>
+              <header-row>
+                <col><text attr="model" /></col>
+                <col><text attr="speed" /></col>
+              </header-row>
+              <model-row>
+                <col><field readonly="true" attr="model" /></col>
+                <col><field readonly="true" attr="speed" /></col>
+              </model-row>
+            </cpu_info>
+          </col></row>
+        </list>
+      </tab>
+    </edit>
+  </module_monitoring>
+
+  <!--
+  The example below adds a button into the advanced_module_configuration location; clicking
+  it opens a browser window which is navigated into the ext_url location. The actual url is
+  defined by the getUrl() JavaScript method of the ExternalLink meta model.
+  -->
+  <advanced_module_configuration model-meta='ExternalLink' model-id='any'>
+    <list type='property-table' widths='100%'><row><col><block><!-- fixup alignment and spacing -->
+      <navigate-action href-attr='ext_url' text='OPEN LDAP ADMIN UI' external='toolbar=no,scrollbars=no,menubar=no,status=no,directories=no,title=LDAP Admin UI,width=800,height=600,x=10,y=10' />
+    </block></col></row></list>
+  </advanced_module_configuration>
+
+  <!--
+  Administration tiles support two locations: before_admin_tiles and after_admin_tiles, the
+  latter demonstrated below.
+    The open_custom_webui opens a dialog providing access to the same ExternalLink model used
+  in the advanced_module_configuration, demonstrating more ways for accessing a stand-alone web
+  user interface from within the Luminato management console.
+  -->
+  <after_admin_tiles model-meta='AdminTile' model-multiple='true'>
+    <edit-action id='admin_tile' location-attr='location' options="{'tab-id': 'to_be_opened'}">
+      <heading attr="name" />
+      <text attr="description" />
+      <icon attr="icon" />
+    </edit-action>
+  </after_admin_tiles>
+
+  <popup-container>
+    <open_custom_webui icon='Configure' heading=' LDAP Admin UI' model-meta='ExternalLink' model-id='0'>
+      <block>
+        <navigate-action href-attr='ext_url' text='LDAP Admin UI' external='toolbar=no,scrollbars=no,menubar=no,status=no,directories=no,title=LDAP Admin UI,width=800,height=600,x=10,y=10' />
+      </block>
+    </open_custom_webui>
+  </popup-container>
+</engine>

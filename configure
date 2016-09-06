@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+SRCDIR=web-app
+
+echo "Fetching and installing node_modules ..."
+(cd $SRCDIR && npm install)
+
+echo "Linting Node.js code ..."
+make lint
+
+echo "Running tests ..."
+(cd $SRCDIR && npm run test)
+
+echo "============================================="
+echo "Looks good. Now you may install with:"
+echo
+echo "    make install DESTDIR=/path/to/staging/dir"
+echo
+echo "or containerize with Docker:"
+echo
+echo "    docker build --pull --tag lpc-ldap-server:0.1 ."
+echo
+echo "============================================="

@@ -1,0 +1,66 @@
+{
+  "namespace": "LDAP",
+  "ctor": "/ldap-admin/LDAP",
+  "version": "1",
+  "host-references": {
+    "enum-meta": {
+      "HostVlans": "EngineVlan"
+    }
+  },
+  "model-meta": [
+    {
+      "id": "OsInfo",
+      "url": "/monitor/os",
+      "attributes": [
+        {"name": "hostname", "label": "Hostname",         "type": "STRING"},
+        {"name": "type",     "label": "Operating system", "type": "STRING"},
+        {"name": "release",  "label": "Kernel release",   "type": "STRING"},
+        {"name": "arch",     "label": "Architecture",     "type": "STRING"}
+      ]
+    },
+    {
+      "id": "OsStats",
+      "url": "/monitor/stats",
+      "refetchInterval": "5s",
+      "attributes": [
+        {"name": "totalmem",     "label": "Total memory",           "type": "STRING"},
+        {"name": "freemem",      "label": "Free memory",            "type": "STRING"},
+        {"name": "loadavg",      "label": "Load averages",          "type": "CUSTOM_NUMBER", "converter": "FLOAT_LIST"},
+        {"name": "temperatures", "label": "Temperatures (&#8451;)", "type": "CUSTOM_NUMBER", "converter": "FLOAT_LIST"}
+      ]
+    },
+    {
+      "id": "CpuInfo",
+      "url": "/monitor/cpu",
+      "refetchInterval": "5s",
+      "attributes": [
+        {"name": "model", "label": "Processor model", "type": "STRING"},
+        {"name": "speed", "label": "Speed (MHz)",     "type": "STRING"}
+      ]
+    },
+    {
+      "id": "ExternalLink",
+      "url": "N/A",
+      "local": true,
+      "attributes": [
+        {"name": "ext_url", "getFn": "getUrl"}
+      ],
+      "models": [
+        {"id": "0", "unique_id": "0"}
+      ]
+    },
+    {
+      "id": "AdminTile",
+      "local": true,
+      "attributes": [
+        {"name": "name",        "rw": "rw", "label": "Name"},
+        {"name": "description", "rw": "rw", "label": "Description"},
+        {"name": "location",    "rw": "rw", "label": "Link"},
+        {"name": "icon",        "type": "ICON", "defaultValue": "LOG_SETTINGS"}
+      ],
+      "models": [
+        {"id": "1", "unique_id": "1", "name": "LDAP Admin UI", "description": "Open stand-alone phpLDAPadmin web UI.", "location": "open_custom_webui"}
+      ]
+    }
+  ]
+}

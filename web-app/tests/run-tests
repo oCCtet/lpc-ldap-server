@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+# Test program, assumed to be run via 'npm test' from the
+# web-app base directory (where the package.json is located).
+#
+# (Bashism's used include the 'cmd <(cmd) <(cmd)' process
+# substitution.)
+
+#set -x
+
+#
+# Options.
+#
+hostname="localhost"
+port=8079
+
+# Include functions.
+. tests/functions
+
+#
+# The tests.
+#
+exec_test "JavaScript linting" make lint
+ensure_no_errors
+
+spawn_jobs
+
+xfer_test  "/app.json" \
+           '/app.json' \
+           'public/app.json'
+
+xfer_test  "/ldap-admin/index.json" \
+           '/ldap-admin/index.json' \
+           'public/ldap-admin/index.json'
+
+jsonp_test "/ldap-admin/LDAP" \
+           '/ldap-admin/LDAP?callback=test' \
+           'test' \
+           'public/ldap-admin/LDAP.jsonp'
+
+query_test "/monitor (os)" \
+           '/monitor' \
+           'jq -c ".os?|.[0]|keys"' \
+           '["arch","hostname","id","platform","release","type"]'
+
+query_test "/monitor (stats)" \
+           '/monitor' \
+           'jq -c ".stats?|.[0]|keys"' \
+           '["freemem","id","loadavg","temperatures","totalmem"]'
+
+query_test "/monitor (cpu)" \
+           '/monitor' \
+           'jq -c ".cpu?|.[0]|keys"' \
+           '["id","model","speed","times"]'
+
+query_test "/monitor/stats (temperatures)" \
+           '/monitor/stats' \
+           'jq -c ".[0]|.temperatures"' \
+           '[37.4,62.1]'
+
+ensure_no_errors
+
+kill_jobs
+report
+# EOF

@@ -1,0 +1,5 @@
+.install
+*~
+*.tar.gz
+tests/*.conf
+node_modules/
