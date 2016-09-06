@@ -84,7 +84,7 @@
   -->
   <advanced_module_configuration model-meta='ExternalLink' model-id='any'>
     <list type='property-table' widths='100%'><row><col><block><!-- fixup alignment and spacing -->
-      <navigate-action href-attr='ext_url' text='OPEN LDAP ADMIN UI' external='toolbar=no,scrollbars=no,menubar=no,status=no,directories=no,title=LDAP Admin UI,width=800,height=600,x=10,y=10' />
+      <navigate-action href-attr='ext_url' text='OPEN LDAP ADMIN UI' external='toolbar=no,scrollbars=yes,menubar=no,status=no,directories=no,title=LDAP Admin UI,width=1024,height=768,x=10,y=10' />
     </block></col></row></list>
   </advanced_module_configuration>
 
@@ -106,7 +106,7 @@
   <popup-container>
     <open_custom_webui icon='Configure' heading=' LDAP Admin UI' model-meta='ExternalLink' model-id='0'>
       <block>
-        <navigate-action href-attr='ext_url' text='LDAP Admin UI' external='toolbar=no,scrollbars=no,menubar=no,status=no,directories=no,title=LDAP Admin UI,width=800,height=600,x=10,y=10' />
+        <navigate-action href-attr='ext_url' text='OPEN LDAP ADMIN UI' external='toolbar=no,scrollbars=yes,menubar=no,status=no,directories=no,title=LDAP Admin UI,width=1024,height=768,x=10,y=10' />
       </block>
     </open_custom_webui>
   </popup-container>
