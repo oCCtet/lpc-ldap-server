@@ -27,7 +27,7 @@
     "body-parser": "~1.14.0"
   },
   "devDependencies": {
-    "jshint": "~2.8.0",
-    "make-jshint": "~1.0.0"
+    "jshint": ">=2.8.0",
+    "make-jshint": ">=1.0.0"
   }
 }
