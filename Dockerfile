@@ -1,4 +1,4 @@
-FROM node:0.10
+FROM node:lts-stretch-slim
 
 ENV appdir /usr/src/app
 
